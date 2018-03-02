@@ -88,9 +88,10 @@ var JunitReporter = function (_events$EventEmitter) {
                 xml = _prepareTestResults.xml,
                 testResults = _prepareTestResults.testResults;
 
+            var testPlanKey = this.config.suite;
             var testResultsString = testResults.pass + '|' + testResults.fail + '|' + testResults.pending;
             var now = (0, _moment2.default)().format('DD-MM-YYYY HH:mm:ss');
-            var filename = testResultsString + ' ' + now + '.xml'; // default
+            var filename = testPlanKey + ' ' + testResultsString + ' ' + now + '.xml'; // default
             if (typeof (0, _lodash.get)(this.options, 'outputFileFormat.single') === 'function') {
                 filename = this.options.outputFileFormat.single({
                     config: this.config
