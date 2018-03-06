@@ -212,8 +212,24 @@ var JunitReporter = function (_events$EventEmitter) {
                                             if (testKey !== 'undefined') {
                                                 // fix cucumber hooks crashing reporter
                                                 var test = suite.tests[testKey];
-                                                var testName = this.prepareName(test.title);
+                                                var testName = void 0,
+                                                    testDesc = void 0,
+                                                    testPriority = void 0;
+                                                try {
+                                                    var json = JSON.parse(test.title);
+                                                    testName = json.name;
+                                                    testDesc = json.desc;
+                                                    testPriority = json.priority;
+                                                } catch (err) {
+                                                    testName = this.prepareName(test.title);
+                                                }
                                                 var testCase = testSuite.testCase().className(packageName + '.' + suiteName).name(testName).time(test.duration / 1000);
+                                                if (testDesc) {
+                                                    testCase._attributes.description = testDesc;
+                                                }
+                                                if (testPriority) {
+                                                    testCase._attributes.priority = testPriority;
+                                                }
 
                                                 if (typeof testResults[test.state] === 'number') {
                                                     testResults[test.state]++;
