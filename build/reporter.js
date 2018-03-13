@@ -32,6 +32,12 @@ var _moment = require('moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
+var _md = require('md5');
+
+var md5 = _interopRequireWildcard(_md);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -240,6 +246,7 @@ var JunitReporter = function (_events$EventEmitter) {
                                                 }
 
                                                 if (test.error) {
+                                                    testCase._attributes.screenshot = md5.default(suite.title + ' ' + testName) + '.png';
                                                     var errorOptions = this.options.errorOptions;
                                                     if (errorOptions) {
                                                         var _iteratorNormalCompletion6 = true;
