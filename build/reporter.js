@@ -246,7 +246,7 @@ var JunitReporter = function (_events$EventEmitter) {
                                                 }
 
                                                 if (test.error) {
-                                                    testCase._attributes.screenshot = md5.default(suite.title + ' ' + testName) + '.png';
+                                                    testCase._attributes.screenshot = md5.default(testName) + '.png';
                                                     var errorOptions = this.options.errorOptions;
                                                     if (errorOptions) {
                                                         var _iteratorNormalCompletion6 = true;
