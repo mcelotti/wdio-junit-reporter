@@ -90,14 +90,18 @@ var JunitReporter = function (_events$EventEmitter) {
     }, {
         key: 'onSingleFileOutput',
         value: function onSingleFileOutput() {
-            var _prepareTestResults = this.prepareTestResults(this.baseReporter.stats.runners),
+            var runners = this.baseReporter.stats.runners;
+
+            var _prepareTestResults = this.prepareTestResults(runners),
                 xml = _prepareTestResults.xml,
                 testResults = _prepareTestResults.testResults;
 
+            var runner = runners[Object.keys(runners)[0]];
+            var browserName = runner.capabilities.browserName.split(' ').join('');
             var testPlanKey = this.config.suite;
             var testResultsStr = 'P' + testResults.pass + ' F' + testResults.fail + ' S' + testResults.pending;
             var now = (0, _moment2.default)().format('DD.MM.YYYY HH-mm-ss');
-            var filename = testPlanKey + ' [' + testResultsStr + '] [' + now + '].xml'; // default
+            var filename = testPlanKey + ' ' + browserName + ' [' + testResultsStr + '] [' + now + '].xml'; // default
             if (typeof (0, _lodash.get)(this.options, 'outputFileFormat.single') === 'function') {
                 filename = this.options.outputFileFormat.single({
                     config: this.config
