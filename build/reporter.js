@@ -179,7 +179,6 @@ var JunitReporter = function (_events$EventEmitter) {
                     var key = _step2.value;
 
                     var capabilities = runners[key];
-                    var packageName = this.options.packageName ? capabilities.sanitizedCapabilities + '-' + this.options.packageName : capabilities.sanitizedCapabilities;
 
                     var _iteratorNormalCompletion3 = true;
                     var _didIteratorError3 = false;
@@ -233,7 +232,7 @@ var JunitReporter = function (_events$EventEmitter) {
                                                 } catch (err) {
                                                     testName = this.prepareName(test.title);
                                                 }
-                                                var testCase = testSuite.testCase().className(packageName + '.' + suiteName).name(testName).time(test.duration / 1000);
+                                                var testCase = testSuite.testCase().className('' + suiteName).name(testName).time(test.duration / 1000);
                                                 if (testDesc) {
                                                     testCase._attributes.description = testDesc;
                                                 }
